@@ -20,9 +20,7 @@ from version import __version__
 
 import asyncio
 import discord
-intents = discord.Intents.default()
-intents.members = True
-intents.presences = True
+intents = discord.Intents.all()
 import logging
 from rpc.client import RPCClient
 from tasks.transaction_queue import TransactionQueue
@@ -96,6 +94,7 @@ if __name__ == "__main__":
 		# Initialize database first
 		logger.info("Initializing database")
 		loop.run_until_complete(DBConfig().init_db())
+		
 		tasks = [
 			client.start(config.bot_token),
 			# Create two queue consumers for transactions
@@ -119,7 +118,7 @@ if __name__ == "__main__":
 	finally:
 		logger.info("Graham is exiting")
 		tasks = [
-			client.logout(),
+			client.close(),
 			RPCClient.close(),
 			RedisDB.close(),
 			Tortoise.close_connections()

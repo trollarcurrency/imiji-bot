@@ -133,20 +133,20 @@ class AccountCog(commands.Cog):
             await Messages.send_error_dm(msg.author, "I failed at retrieving your address, try again later and contact my master if the issue persists.")
             return
         # Build URI
-        uri_scheme = "ban:" if Env.banano() else "nano:"
+        uri_scheme = "troll:" if Env.banano() else "nano:"
         if amount == 0:
             uri = user_address
         else:
             uri = "{0}{1}?amount={2}".format(uri_scheme, user_address, Env.amount_to_raw(amount))
         # Build and send response
-        embed = discord.Embed(colour=0xFBDD11 if Env.banano() else discord.Colour.dark_blue())
+        embed = discord.Embed(colour=0xFFFFFF if Env.banano() else discord.Colour.dark_blue())
         embed.set_author(name=user_address, icon_url="https://github.com/bbedward/graham_discord_bot/raw/master/assets/banano_logo.png" if Env.banano() else "https://github.com/bbedward/graham_discord_bot/raw/master/assets/nano_logo.png")
         embed.set_image(url=f"https://chart.googleapis.com/chart?cht=qr&chl={uri}&chs=180x180&choe=UTF-8&chld=L|2")
         await msg.author.send(embed=embed)
         await msg.author.send(user_address)
 
     def format_balance_message(self, balance_raw: int, pending_raw: int, pending_send_db: int, pending_receive_db: int) -> discord.Embed:
-        embed = discord.Embed(colour=0xFBDD11 if Env.banano() else discord.Colour.dark_blue())
+        embed = discord.Embed(colour=0xFFFFFF if Env.banano() else discord.Colour.dark_blue())
         embed.set_author(name="Balance", icon_url="https://github.com/bbedward/graham_discord_bot/raw/master/assets/banano_logo.png" if Env.banano() else "https://github.com/bbedward/graham_discord_bot/raw/master/assets/nano_logo.png")
         embed.description = "**Available:**\n"
         embed.description += f"```{Env.commafy(Env.format_float(Env.raw_to_amount(balance_raw - pending_send_db)))} {Env.currency_symbol()}\n"

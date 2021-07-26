@@ -18,11 +18,11 @@ class Env():
 
     @staticmethod
     def currency_name() -> str:
-        return 'BANANO' if Env.banano() else 'Nano'
+        return 'Trollar' if Env.banano() else 'Nano'
 
     @staticmethod
     def currency_symbol() -> str:
-        return 'BAN' if Env.banano() else 'NANO'
+        return 'TROLLAR' if Env.banano() else 'NANO'
 
     @staticmethod
     def precision_digits() -> int:
