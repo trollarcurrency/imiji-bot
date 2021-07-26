@@ -21,29 +21,29 @@ from util.util import Utils
 
 ## Command documentation
 TIP_INFO = CommandInfo(
-    triggers = ["ban", "b"] if Env.banano() else ["ntip", "n"],
+    triggers = ["troll", "t"] if Env.banano() else ["ntip", "n"],
     overview = "Send a tip to mentioned users",
     details = f"Tip specified amount to mentioned user(s) (**minimum tip is {Constants.TIP_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient(s) will be notified of your tip via private message" +
         "\nSuccessful tips will be deducted from your available balance immediately.\n" +
-     f"Example: `{config.Config.instance().command_prefix}{'ban' if Env.banano() else 'ntip'} 2 @user1 @user2` would send 2 to user1 and 2 to user2"
+     f"Example: `{config.Config.instance().command_prefix}{'troll' if Env.banano() else 'ntip'} 2 @user1 @user2` would send 2 to user1 and 2 to user2"
 )
 TIPSPLIT_INFO = CommandInfo(
-    triggers = ["bansplit", "bs"] if Env.banano() else ["ntipsplit", "ns"],
+    triggers = ["trollsplit", "tsp"] if Env.banano() else ["ntipsplit", "ns"],
     overview = "Split a tip among mentioned users",
     details = f"Divide the specified amount between mentioned user(s) (**minimum tip is {Constants.TIP_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient(s) will be notified of your tip via private message" +
         "\nSuccessful tips will be deducted from your available balance immediately.\n" +
-     f"Example: `{config.Config.instance().command_prefix}{'bansplit' if Env.banano() else 'ntipsplit'} 2 @user1 @user2` would send 1 to user1 and 2 to user2"
+     f"Example: `{config.Config.instance().command_prefix}{'trollsplit' if Env.banano() else 'ntipsplit'} 2 @user1 @user2` would send 1 to user1 and 2 to user2"
 )
 TIPRANDOM_INFO = CommandInfo(
-    triggers = ["banrandom", "br"] if Env.banano() else ["ntiprandom", "ntr"],
+    triggers = ["trollrandom", "tr"] if Env.banano() else ["ntiprandom", "ntr"],
     overview = "Tip an active user at random.",
     details = f"Tips the specified amount to an active user at random (**minimum tip is {Constants.TIPRANDOM_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient will be notified of your tip via private message and you'll be notified of who the random recipient was."
 )
 TIPAUTHOR_INFO = CommandInfo(
-    triggers = ["banauthor", "tipauthor"] if Env.banano() else ["tipauthor"],
+    triggers = ["trollauthor", "tipauthor"] if Env.banano() else ["tipauthor"],
     overview = "Donate to support my creator",
     details = f"Support the author of this bot (bbedward)"
 )
@@ -96,7 +96,7 @@ class TipsCog(commands.Cog):
             elif ctx.command.name != 'tiprandom_cmd' and ctx.command.name != 'burn' and send_amount < Constants.TIP_MINIMUM:
                 raise AmountMissingException(f"Tip amount is too low, minimum is {Constants.TIP_MINIMUM}")
             elif ctx.command.name == 'burn' and send_amount < 1.0:
-                raise AmountMissingException(f"Come on, burn at least 1 BAN")
+                raise AmountMissingException(f"Come on, burn at least 1 TROLLAR")
             elif Validators.too_many_decimals(send_amount):
                 await Messages.send_error_dm(ctx.message.author, f"You are only allowed to use {Env.precision_digits()} digits after the decimal.")
                 ctx.error = True
