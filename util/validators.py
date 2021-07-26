@@ -34,7 +34,7 @@ class Validators():
                 account_lookup[account_map[i]] = BitArray(uint=i, length=5)
 
             # Extract key from address (everything after prefix)
-            acrop_key = address[4:-8] if address[:5] != 'troll_' else address[6:-8]
+            acrop_key = address[4:-8] if address[:6] != 'troll_' else address[6:-8]
             # Extract checksum from address
             acrop_check = address[-8:]
 

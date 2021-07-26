@@ -1,4 +1,5 @@
 from discord.ext import commands
+from discord import Member
 from discord.ext.commands import Bot, Context
 from models.command import CommandInfo
 from models.constants import Constants
@@ -21,7 +22,7 @@ from util.util import Utils
 
 ## Command documentation
 TIP_INFO = CommandInfo(
-    triggers = ["troll", "t"] if Env.banano() else ["ntip", "n"],
+    triggers = ["troll", "t", "tip"] if Env.banano() else ["ntip", "n"],
     overview = "Send a tip to mentioned users",
     details = f"Tip specified amount to mentioned user(s) (**minimum tip is {Constants.TIP_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient(s) will be notified of your tip via private message" +
@@ -29,7 +30,7 @@ TIP_INFO = CommandInfo(
      f"Example: `{config.Config.instance().command_prefix}{'troll' if Env.banano() else 'ntip'} 2 @user1 @user2` would send 2 to user1 and 2 to user2"
 )
 TIPSPLIT_INFO = CommandInfo(
-    triggers = ["trollsplit", "tsp"] if Env.banano() else ["ntipsplit", "ns"],
+    triggers = ["trollsplit", "tsp", "tipsplit"] if Env.banano() else ["ntipsplit", "ns"],
     overview = "Split a tip among mentioned users",
     details = f"Divide the specified amount between mentioned user(s) (**minimum tip is {Constants.TIP_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient(s) will be notified of your tip via private message" +
@@ -37,7 +38,7 @@ TIPSPLIT_INFO = CommandInfo(
      f"Example: `{config.Config.instance().command_prefix}{'trollsplit' if Env.banano() else 'ntipsplit'} 2 @user1 @user2` would send 1 to user1 and 2 to user2"
 )
 TIPRANDOM_INFO = CommandInfo(
-    triggers = ["trollrandom", "tr"] if Env.banano() else ["ntiprandom", "ntr"],
+    triggers = ["trollrandom", "tr", "tiprandom"] if Env.banano() else ["ntiprandom", "ntr"],
     overview = "Tip an active user at random.",
     details = f"Tips the specified amount to an active user at random (**minimum tip is {Constants.TIPRANDOM_MINIMUM} {Constants.TIP_UNIT}**)" +
         "\nThe recipient will be notified of your tip via private message and you'll be notified of who the random recipient was."
@@ -65,7 +66,7 @@ class TipsCog(commands.Cog):
             # Check admins
             ctx.god = msg.author.id in config.Config.instance().get_admin_ids()
             ctx.admin = False
-            author: discord.Member = msg.author
+            author: Member = msg.author
             for role in author.roles:
                 if role.id in config.Config.instance().get_admin_roles():
                     ctx.admin = True

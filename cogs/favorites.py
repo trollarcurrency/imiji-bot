@@ -35,7 +35,7 @@ FAVORITES_INFO = CommandInfo(
     details = f"View the list of every user you have favorited. You can tip all of them using `{config.Config.instance().command_prefix}{'banfavorites' if Env.banano() else 'ntipfavorites'} <amount>`"
 )
 TIPFAVORITES_INFO = CommandInfo(
-    triggers = ["banfavorites" if Env.banano() else "ntipfavorites"],
+    triggers = ["trollfavorites", "tipfavorites" if Env.banano() else "ntipfavorites"],
     overview = "Tip all the favorites",
     details = f"Split a tip among all of the users in your favorites list - similar to a tipsplit. (**minimum tip is {Constants.TIP_MINIMUM} {Constants.TIP_UNIT}**)" +
                 f"\nExample: `{config.Config.instance().command_prefix}{'banfavorites' if Env.banano() else 'ntipfavorites'} <amount>`"
