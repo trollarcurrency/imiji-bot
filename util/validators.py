@@ -25,8 +25,8 @@ class Validators():
 
     @staticmethod
     def validate_checksum_xrb(address: str) -> bool:
-        """Given an xrb/nano/ban address validate the checksum"""
-        if (address[:5] == 'nano_' and len(address) == 65) or (address[:4] in ['ban_', 'xrb_']  and len(address) == 64):
+        """Given an xrb/nano/troll address validate the checksum"""
+        if (address[:5] == 'nano_' and len(address) == 65) or (address[:6] == 'troll_'  and len(address) == 66):
             # Populate 32-char account index
             account_map = "13456789abcdefghijkmnopqrstuwxyz"
             account_lookup = {}
@@ -34,7 +34,7 @@ class Validators():
                 account_lookup[account_map[i]] = BitArray(uint=i, length=5)
 
             # Extract key from address (everything after prefix)
-            acrop_key = address[4:-8] if address[:5] != 'nano_' else address[5:-8]
+            acrop_key = address[4:-8] if address[:5] != 'troll_' else address[6:-8]
             # Extract checksum from address
             acrop_check = address[-8:]
 

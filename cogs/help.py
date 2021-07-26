@@ -123,7 +123,7 @@ class HelpCog(commands.Cog):
         """Builds paginated help menu"""
         pages = []
         # Overview
-        author=f"Graham v{__version__} ({'BANANO' if Env.banano() else 'Nano'}) edition"
+        author=f"Graham v{__version__} ({'Trollar' if Env.banano() else 'Nano'}) edition"
         title="Command Overview"
         description=("Use `{0}help command` for more information about a specific command " +
                 " or go to the next page").format(config.Config.instance().command_prefix)
@@ -146,11 +146,12 @@ class HelpCog(commands.Cog):
         heart = '\U0001F49B' if Env.banano() else '\U0001F499'
         description = "This bot is completely free, open source, and MIT licensed"
         description+= f"\n\nMade with {heart} for the **BANANO** and **NANO** communities"
-        description+= f"\nHangout with some awesome people at https://chat.banano.cc"
+        description+= f"\nForked for the Trollar digital currency by @foskqm#6750"
+        description+= f"\n\nHangout with some awesome people at https://chat.banano.cc"
         description+= f"\nMy Discord: **@bbedward#9246**"
         description+= f"\nMy Reddit: **/u/bbedward**"
         description+= f"\nMy Twitter: **@theRealBbedward**"
-        description+= f"\n\nGraham GitHub: https://github.com/bbedward/graham_discord_bot"
+        description+= f"\n\nGraham GitHub: https://github.com/trollarcurrency/graham_discord_bot"
         pages.append(Page(entries=entries, author=author,description=description))
         return pages
 

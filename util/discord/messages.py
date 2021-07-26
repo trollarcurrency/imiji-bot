@@ -69,11 +69,12 @@ class Messages():
     async def add_tip_reaction(msg: discord.Message, amount: float, rain: bool = False):
         if Env.banano():
             if amount > 0:
-                try:
-                    await msg.add_reaction('\:tip:425878628119871488') # TIP mark
-                    await msg.add_reaction('\:tick:425880814266351626') # check mark
-                except Exception:
-                    await msg.add_reaction('\U00002611') # fallback for non-banano server
+                await msg.add_reaction('\U00002611');
+                #try:
+                #    await msg.add_reaction('\:tip:425878628119871488') # TIP mark
+                #    await msg.add_reaction('\:tick:425880814266351626') # check mark
+                #except Exception:
+                #    await msg.add_reaction('\U00002611') # fallback for non-banano server
             if amount > 0 and amount < 50:
                 await msg.add_reaction('\U0001F987') # S
             elif amount >= 50 and amount < 250:
@@ -81,10 +82,11 @@ class Messages():
             elif amount >= 250:
                 await msg.add_reaction('\U0001F98D') # W
             if rain:
-                try:
-                    await msg.add_reaction('\:bananorain:430826677543895050') # Banano rain
-                except Exception:
-                    await msg.add_reaction('\U0001F4A6') # Sweat Drops
+                await msg.add_reaction('\U0001F4A6') # Sweat Drops
+                #try:
+                #    await msg.add_reaction('\:bananorain:430826677543895050') # Banano rain
+                #except Exception:
+                #    await msg.add_reaction('\U0001F4A6') # Sweat Drops
         else:
             if amount > 0:
                 await msg.add_reaction('\U00002611') # check mark

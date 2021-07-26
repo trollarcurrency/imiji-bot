@@ -189,7 +189,7 @@ class AccountCog(commands.Cog):
                     )
                 )
         except Exception:
-            self.logger.exception("Unavailble to retrieve user from database")
+            self.logger.exception("Unavailable to retrieve user from database")
             await Messages.send_error_dm(msg.author, "I was unable to retrieve your balance, try again later.")
 
     async def pocket_pendings(self, msg: discord.Message, address: str, dbuser: User):
