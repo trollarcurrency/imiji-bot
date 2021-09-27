@@ -45,7 +45,7 @@ class TransactionQueue(object):
             self.logger.warn(f"User with ID {tx.sending_user.id} was not found, so I couldn't notify them of their withdraw")
             return
         if Env.banano():
-            await user.send(f"Withdraw processed: https://creeper.banano.cc/explorer/block/{hash}")
+            await user.send(f"Withdraw processed: https://explorer.trollar.life/explorer/block/{hash}")
         else:
             await user.send(f"Withdraw processed: https://nanocrawler.cc/explorer/block/{hash}")
 
